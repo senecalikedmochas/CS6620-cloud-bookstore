@@ -1,38 +1,288 @@
-.App {
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #212426;
+  margin: 0;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: 2px solid magenta; */
+}
+
+.app-name {
+  font-family: "Roboto Slab", serif;
+  font-size: 3rem;
+  letter-spacing: 0.9px;
+  background: linear-gradient(
+    90deg,
+    rgba(249, 211, 180, 1) 0%,
+    rgba(249, 211, 180, 0) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.search {
+  width: 60%;
+  padding: 1.5rem 1.75rem;
+  margin: 1em 0 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  background: #1f2123;
+  box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
+  -webkit-box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 1.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: #a1a1a1;
+  background: #1f2123;
+  border: none;
+  outline: none;
+}
+
+.search-icon {
+  width: 30px;
+  cursor: pointer;
+}
+
+.status-message {
+  font-size: 1.25rem;
+  font-family: inherit;
+  color: #f9d3b4;
+  margin-top: 3em;
+}
+
+.book-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* border: 2px solid yellowgreen; */
+}
+
+.book {
+  margin: 2em 1.5em;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  /* border: 2px solid lightblue; */
+}
+
+.book:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+
+/* .book-year {
+  position: absolute;
+  top: 0;
+  padding: 16px;
+  opacity: 0;
+  color: #f9d3b4;
+} */
+
+/* .book:hover .book-year {
+  opacity: 1;
+} */
+
+.book-poster {
+  width: 100%;
+  height: 100%;
+}
+
+.book:hover .book-poster {
+  opacity: 0.3;
+}
+
+/* .book-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #343739;
+  padding: 1em;
+} */
+
+/* .book:hover .book-info {
+  background-color: transparent;
+} */
+
+/* .book-type {
+  font-family: inherit;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #f0f0f0;
+} */
+
+/* .book-title {
+  font-family: inherit;
+  color: #f9d3b4;
+} */
+
+.modal-left-section {
+  background-color: #99ddcc;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.inspiring-quote {
+  padding: 0 0.5em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.modal-right-section {
+  background-color: #1b2a49;
+  color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 0 2em;
+}
+
+.modal-right-section__header {
+  font-weight: 300;
+  font-size: 1.75rem;
+}
+
+.modal-form-label {
+  font-size: 0.75rem;
+  padding-left: 0.35em;
+}
+
+.modal-form-input {
+  width: 90%;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  border: 2px solid black;
+  padding: 0.35em;
+  font-family: inherit;
+}
+
+.input-tick-wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75em;
+}
+
+.tick {
+  color: #07cc81;
+  margin-left: 0.5em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all ease-in 0.2s;
+}
+
+.valid .tick {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.valid .modal-form-input {
+  border-color: #07cc81;
+}
+
+.valid .modal-form-input:focus {
+  outline-color: #07cc81;
+}
+
+.send-btn {
+  width: 90%;
+  background-color: #99ddcc;
+  padding: 0.625em 1.25em;
   color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.close-btn {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  cursor: pointer;
+  font-size: 1.25rem;
 }
 
-@keyframes App-logo-spin {
-  from {
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #000 transparent #555 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
   }
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content {
+  transform: scale(0.85, 0.85);
+  transition: transform 300ms ease;
+}
+
+.ReactModal__Content--after-open {
+  transform: scale(1, 1);
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
 }
