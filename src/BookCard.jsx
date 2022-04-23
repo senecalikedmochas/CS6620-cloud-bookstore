@@ -18,6 +18,23 @@ const BookCard = ({ book }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (isValid) {
+      fetch("https://r4j5phdhlnalvfg35iiruwzmgq0iltij.lambda-url.us-east-1.on.aws/", {
+        method: "POST",
+        body: JSON.stringify({
+        "key": {
+          "book_id": "1080"
+        },
+        "email_address": {
+          "name": "dchang11194@gmail.com"
+        },
+        "book_title": {
+          "title": "hi"
+        },
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    }).then(response=> response.json()).then(data=>console.log(data))
       console.log("thank you")
     }
   }
