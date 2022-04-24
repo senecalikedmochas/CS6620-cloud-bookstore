@@ -15,20 +15,24 @@ const BookCard = ({ book }) => {
   const emailRegex =
     /^([A-Za-z\d\._-]+)@([A-Za-z\d-]+)\.([A-Za-z]{2,6})(\.[A-Za-z]{2,6})?$/
 
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(book)
+    
+    //https://r4j5phdhlnalvfg35iiruwzmgq0iltij.lambda-url.us-east-1.on.aws/"
     if (isValid) {
-      fetch("https://r4j5phdhlnalvfg35iiruwzmgq0iltij.lambda-url.us-east-1.on.aws/", {
+      fetch("https://sp6sehwj2oxwyhxs53gxtsphnm0exhaq.lambda-url.us-east-1.on.aws/", {
         method: "POST",
         body: JSON.stringify({
         "key": {
-          "book_id": "1080"
+          "book_id": book.id.toString()
         },
         "email_address": {
-          "name": "dchang11194@gmail.com"
+          "name": email
         },
         "book_title": {
-          "title": "hi"
+          "title": book.title
         },
         headers: {
           'content-type': 'application/json'
@@ -36,6 +40,8 @@ const BookCard = ({ book }) => {
       })
     }).then(response=> response.json()).then(data=>console.log(data))
       console.log("thank you")
+      console.log(book.id)
+      console.log(book.title)
     }
   }
 
