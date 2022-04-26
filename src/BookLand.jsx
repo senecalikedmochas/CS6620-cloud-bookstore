@@ -12,7 +12,6 @@ const BookLand = () => {
 
   const searchBooks = async (title) => {
     setIsLoading(true)
-    ///books?page=2
     const response = await fetch(`${API_URL}?search=${title}`)
     const data = await response.json()
     setBooks(data.results)

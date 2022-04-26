@@ -222,6 +222,10 @@ body {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 .close-btn {
   position: absolute;
   top: 0.5em;

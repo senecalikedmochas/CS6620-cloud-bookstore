@@ -11,38 +11,44 @@ const BookCard = ({ book }) => {
   const [isValid, setIsValid] = useState(false)
   const [email, setEmail] = useState("")
   const [quote, setQuote] = useState("")
+  const [isComplete, setIsComplete] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const emailRegex =
     /^([A-Za-z\d\._-]+)@([A-Za-z\d-]+)\.([A-Za-z]{2,6})(\.[A-Za-z]{2,6})?$/
 
-
   const handleSubmit = (e) => {
+    setIsLoading(true)
     e.preventDefault()
-    console.log(book)
-    
-    //https://r4j5phdhlnalvfg35iiruwzmgq0iltij.lambda-url.us-east-1.on.aws/"
     if (isValid) {
-      fetch("https://sp6sehwj2oxwyhxs53gxtsphnm0exhaq.lambda-url.us-east-1.on.aws/", {
-        method: "POST",
-        body: JSON.stringify({
-        "key": {
-          "book_id": book.id.toString()
-        },
-        "email_address": {
-          "name": email
-        },
-        "book_title": {
-          "title": book.title
-        },
-        headers: {
-          'content-type': 'application/json'
+      fetch(
+        "https://sp6sehwj2oxwyhxs53gxtsphnm0exhaq.lambda-url.us-east-1.on.aws/",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            key: {
+              book_id: book.id.toString(),
+            },
+            email_address: {
+              name: email,
+            },
+            book_title: {
+              title: book.title,
+            },
+            headers: {
+              "content-type": "application/json",
+            },
+          }),
         }
-      })
-    }).then(response=> response.json()).then(data=>console.log(data))
-      console.log("thank you")
-      console.log(book.id)
-      console.log(book.title)
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          setIsComplete(true)
+          setIsLoading(false)
+        })
     }
+    // console.log("hello mars")
   }
 
   const handleChange = (e) => {
@@ -58,6 +64,7 @@ const BookCard = ({ book }) => {
     setModalIsOpen(false)
     setEmail("")
     setIsValid(false)
+    setIsComplete(false)
   }
 
   const generateRandomQuote = () => {
@@ -134,10 +141,15 @@ const BookCard = ({ book }) => {
               />
               <FaCheck className="tick" />
             </div>
-            <button type="submit" className="send-btn">
+            <button
+              type="submit"
+              className="send-btn"
+              disabled={isLoading ? true : false}
+            >
               Send Book
             </button>
           </form>
+          {isComplete && <p>Please check your email for the book!</p>}
         </div>
 
         <FaTimes onClick={handleModalClose} className="close-btn" />
@@ -147,12 +159,3 @@ const BookCard = ({ book }) => {
 }
 
 export default BookCard
-
-{
-  /* <p className="book-year">{book.authors[0]?.name}</p>
-
-<div className="book-info">
-  <span className="book-type">{book.media_type}</span>
-  <h3 className="book-title">{book.title}</h3>
-</div> */
-}
